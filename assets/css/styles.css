@@ -1,0 +1,14 @@
+.carta {
+    width: 10em;
+    position: relative;
+    left: 2.5em;
+    margin-left: -2.5em;
+}
+
+.mazo {
+    margin: 2em 0em;
+}
+
+#jugador-cartas, #computadora-cartas {
+    height: 15em;
+}
