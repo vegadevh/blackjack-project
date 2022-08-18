@@ -27,9 +27,35 @@ const crearDeck = () => {
         }
     }
 
+    deck = _.shuffle(deck);
+    console.log(deck);
+
+    return deck;
 }
 
 crearDeck();
 
-deck = _.shuffle(deck);
+//Pedir una carta de la baraja
+const pedirCartar = () => {
+
+    if (deck.length === 0) {
+        throw 'Baraja sin cartas';
+    }
+    let carta = deck.pop();
+    console.log(carta);
+    return carta;
+}
+
+let carta = pedirCartar();
 console.log(deck);
+
+//Determinar el valor de la carta
+const valorCarta = (carta) => {
+    const valor = carta.substring(0, carta.length - 1);
+    return (isNaN(valor)) ? (valor === 'A') ? 11 : 10 : valor * 1;
+}
+
+let valor = valorCarta(carta)
+
+console.log(valor);
+console.log(`Este es el valor: ${valor}`);
