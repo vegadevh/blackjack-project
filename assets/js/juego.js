@@ -2,6 +2,19 @@ let deck = [];
 let tipos = ['C', 'D', 'H', 'S'];
 let especiales = ['A', 'J', 'K', 'Q'];
 
+//Referencias de HTML
+const buttonNuevo = document.querySelector('#buttonNuevo');
+const buttonPedir = document.querySelector('#buttonPedir');
+const buttonDetener = document.querySelector('#buttonDetener');
+
+const puntajes = document.querySelectorAll('small');
+
+const jugadorCartas = document.querySelector('#jugadorCartas');
+
+// const tagImg = document.createElement('img');
+
+let puntosJugador = 0, puntosComputadora = 0;
+
 const crearDeck = () => {
 
     // Se deben crear todas las cartas
@@ -28,8 +41,6 @@ const crearDeck = () => {
     }
 
     deck = _.shuffle(deck);
-    console.log(deck);
-
     return deck;
 }
 
@@ -42,7 +53,6 @@ const pedirCartar = () => {
         throw 'Baraja sin cartas';
     }
     let carta = deck.pop();
-    console.log(carta);
     return carta;
 }
 
@@ -55,7 +65,25 @@ const valorCarta = (carta) => {
     return (isNaN(valor)) ? (valor === 'A') ? 11 : 10 : valor * 1;
 }
 
-let valor = valorCarta(carta)
+//Eventos
+buttonPedir.addEventListener('click', () => {
+    const carta = pedirCartar();
+    const cartaAgregada = document.createElement('img');
+    puntosJugador = puntosJugador + valorCarta(carta);
 
-console.log(valor);
-console.log(`Este es el valor: ${valor}`);
+    puntajes[0].innerText = puntosJugador;
+    cartaAgregada.classList = 'carta';
+    cartaAgregada.src = `assets/cartas/${carta}.png`;
+    jugadorCartas.append(cartaAgregada);
+
+    //Logica del juego
+    if (puntosJugador > 21) {
+        buttonPedir.disabled = true;
+        console.warn('PASASTE DE 21! PERDISTE!');
+    } else if (puntosJugador === 21) {
+        console.warn('GANASTE!');
+        buttonPedir.disabled = true;
+    } else {
+
+    }
+})
