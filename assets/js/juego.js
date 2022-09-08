@@ -73,7 +73,7 @@ const blackJackModule = (() => {
         if (deck.length === 0) {
             throw 'Baraja sin cartas';
         }
-        return deck.pop();;
+        return deck.pop();
     }
 
     //Determinar el valor de la carta
